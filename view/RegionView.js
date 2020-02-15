@@ -1,13 +1,17 @@
-class RegionView extends BaseView {
+class RegionView {
 
   constructor(region) {
-    super();
     this.region = region;
   }
 
   present() {
     let container = document.createElement("div");
-    container.classList.add("region-container");
+    let header = document.createElement("h1");
+    header.innerText = this.region.name;
+    container.appendChild(header);
+    container.classList.add("region-container", "tab-pane");
+    container.setAttribute("role", "tabpanel");
+    container.id = this.region.name;
     console.log(this.region.grid);
     let grid = this.region.grid;
     for (let i = 0; i < grid.length; i++) {
@@ -22,7 +26,8 @@ class RegionView extends BaseView {
       }
       container.appendChild(rowContainer);
     }
-    this.appView.appendChild(container);
+    return container;
   }
 
 }
+// <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
