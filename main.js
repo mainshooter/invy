@@ -1,4 +1,3 @@
-let store = new Store();
-
-let regionView = new RegionView(store.region.kleding);
-regionView.present();
+let scene = new Scene();
+let mainController = new MainController(scene);
+mainController.start();
