@@ -18,7 +18,7 @@ class RegionsView {
       new TabItem("Tierlantijn", "tierlantijn").present(),
       new TabItem("Decoratie", "decoratie").present(),
     ];
-    console.log(tabItems);
+
     for (let i = 0; i < tabItems.length; i++) {
       console.log(tabItems[i]);
       navTabs.appendChild(tabItems[i]);

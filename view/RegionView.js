@@ -8,11 +8,12 @@ class RegionView {
     let container = document.createElement("div");
     let header = document.createElement("h1");
     header.innerText = this.region.name;
+
     container.appendChild(header);
     container.classList.add("region-container", "tab-pane");
     container.setAttribute("role", "tabpanel");
     container.id = this.region.name;
-    console.log(this.region.grid);
+
     let grid = this.region.grid;
     for (let i = 0; i < grid.length; i++) {
       let row = grid[i];
