@@ -20,6 +20,10 @@ class RegionsView {
     ];
 
     for (let i = 0; i < tabItems.length; i++) {
+      tabItems[i].addEventListener('click', (event) => {
+        event.preventDefault();
+        this.handleTabClick(event);
+      });
       navTabs.appendChild(tabItems[i]);
     }
 
@@ -33,5 +37,20 @@ class RegionsView {
     container.appendChild(tabContent);
 
     return container;
+  }
+
+  handleTabClick(event) {
+    let target = event.target;
+    let hash = target.href;
+    hash = hash.split("#")[1];
+
+    let tab = document.querySelector("#" + hash);
+
+    let tabContents = document.querySelectorAll(".tab-content .tab-pane");
+    for (let i = 0; i < tabContents.length; i++) {
+      tabContents[i].classList.remove("active");
+      tabContents[i].classList.remove("show");
+    }
+    tab.classList.add("active", "show");
   }
 }
