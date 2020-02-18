@@ -40,7 +40,6 @@ class RegionsView {
   }
 
   handleTabClick(event) {
-    // active show
     let target = event.target;
     let hash = target.href;
     hash = hash.split("#")[1];
@@ -51,9 +50,7 @@ class RegionsView {
     for (let i = 0; i < tabContents.length; i++) {
       tabContents[i].classList.remove("active");
       tabContents[i].classList.remove("show");
-      console.log(tabContents[i]);
     }
     tab.classList.add("active", "show");
-    console.log(event);
   }
 }
