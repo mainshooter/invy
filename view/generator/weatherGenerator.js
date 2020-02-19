@@ -1,6 +1,5 @@
 function generateWeatherMessage(station) {
   let container = document.createElement("div");
-  container.classList.add("weather");
 
   let ul = document.createElement("ul");
 

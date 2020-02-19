@@ -8,9 +8,13 @@ class MainController {
   start() {
     let regionsView = new RegionsView(this.store);
     let weatherView = new WeatherView(this);
+    let weatherNode = weatherView.present();
+    let regionNode = regionsView.present();
+    weatherNode.classList.add("col-2");
     let container = document.createElement("div");
-    container.appendChild(regionsView.present());
-    container.appendChild(weatherView.present());
+    container.classList.add("row");
+    container.appendChild(regionNode);
+    container.appendChild(weatherNode);
     this.scene.setView(container);
   }
 
@@ -38,6 +42,9 @@ class MainController {
       }
       if (foundStation) {
         form.appendChild(generateWeatherMessage(foundStation));
+      }
+      else {
+        alert("Station niet gevonden");
       }
     });
   }
