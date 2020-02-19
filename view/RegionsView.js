@@ -11,6 +11,7 @@ class RegionsView {
     let decoratieRegionView = new RegionView(storeRegions.decoratie).present();
 
     let container = document.createElement("div");
+    container.classList.add("col-10");
     let navTabs = document.createElement("ul");
     navTabs.classList.add("nav", 'nav-tabs');
     let tabItems = [
@@ -26,7 +27,7 @@ class RegionsView {
       });
       navTabs.appendChild(tabItems[i]);
     }
-
+    kledingRegionView.classList.add("active", "show")
     let tabContent = document.createElement("div");
     tabContent.classList.add("tab-content");
     tabContent.appendChild(kledingRegionView);

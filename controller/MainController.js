@@ -7,6 +7,45 @@ class MainController {
 
   start() {
     let regionsView = new RegionsView(this.store);
-    this.scene.setView(regionsView.present());
+    let weatherView = new WeatherView(this);
+    let weatherNode = weatherView.present();
+    let regionNode = regionsView.present();
+    weatherNode.classList.add("col-2");
+    let container = document.createElement("div");
+    container.classList.add("row");
+    container.appendChild(regionNode);
+    container.appendChild(weatherNode);
+    this.scene.setView(container);
+  }
+
+  presentWeather(form) {
+    let city = form.querySelector("#city").value;
+    fetch("https://data.buienradar.nl/2.0/feed/json")
+    .then(response => {
+      return response.json();
+    })
+    .then(json => {
+      let weather = json.actual;
+      let stations = weather.stationmeasurements;
+      let foundStation = false;
+      for (let i = 0; i < stations.length; i++) {
+        let station = stations[i];
+        let stationName = station.stationname;
+
+        if (station.regio == city) {
+          foundStation = station;
+        }
+      }
+      let weatherDisplay = form.querySelector(".weather");
+      if (weatherDisplay) {
+        weatherDisplay.remove();
+      }
+      if (foundStation) {
+        form.appendChild(generateWeatherMessage(foundStation));
+      }
+      else {
+        alert("Station niet gevonden");
+      }
+    });
   }
 }
