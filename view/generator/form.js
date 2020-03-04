@@ -18,3 +18,5 @@ function formGenerator(inputFields, callBack) {
   form.appendChild(submit);
   return form;
 }
+
+export { formGenerator }

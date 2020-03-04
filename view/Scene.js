@@ -14,3 +14,5 @@ class Scene {
   }
 
 }
+
+export { Scene };

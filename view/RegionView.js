@@ -30,3 +30,5 @@ class RegionView {
     return container;
   }
 }
+
+export { RegionView }

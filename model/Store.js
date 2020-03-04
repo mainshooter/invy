@@ -1,3 +1,5 @@
+import { Region } from './Region.js'
+
 class Store {
 
   constructor() {
@@ -8,3 +10,5 @@ class Store {
       };
   }
 }
+
+export { Store }

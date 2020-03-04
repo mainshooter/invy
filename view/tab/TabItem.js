@@ -20,3 +20,5 @@ class TabItem {
   }
 
 }
+
+export { TabItem }

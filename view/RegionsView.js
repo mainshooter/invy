@@ -1,3 +1,6 @@
+import { RegionView } from './RegionView.js';
+import { TabItem } from './tab/TabItem.js';
+
 class RegionsView {
 
   constructor(store) {
@@ -55,3 +58,5 @@ class RegionsView {
     tab.classList.add("active", "show");
   }
 }
+
+export { RegionsView }
