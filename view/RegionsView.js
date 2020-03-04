@@ -27,6 +27,7 @@ class RegionsView {
       navTabs.appendChild(tabItems[i]);
     }
 
+
     let tabContent = document.createElement("div");
     tabContent.classList.add("tab-content");
     tabContent.appendChild(kledingRegionView);

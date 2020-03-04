@@ -27,6 +27,8 @@ class RegionView {
       }
       container.appendChild(rowContainer);
     }
+
+    container.appendChild(new ProductListView(this.region).present());
     return container;
   }
 }
