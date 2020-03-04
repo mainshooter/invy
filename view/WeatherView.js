@@ -1,3 +1,5 @@
+import { formGenerator } from './generator/form.js';
+
 class WeatherView {
 
 
@@ -22,3 +24,5 @@ class WeatherView {
   }
 
 }
+
+export { WeatherView }

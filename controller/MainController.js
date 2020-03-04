@@ -1,3 +1,8 @@
+import { Store } from '../model/Store.js';
+import { RegionsView } from '../view/RegionsView.js';
+import { WeatherView } from '../view/WeatherView.js';
+import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
+
 class MainController {
 
   constructor(scene) {
@@ -49,3 +54,5 @@ class MainController {
     });
   }
 }
+
+export { MainController }

@@ -21,3 +21,5 @@ function generateWeatherMessage(station) {
 
   return container;
 }
+
+export { generateWeatherMessage }
