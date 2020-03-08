@@ -8,5 +8,6 @@ class MainController {
   start() {
     let regionsView = new RegionsView(this.store);
     this.scene.setView(regionsView.present());
+    regionsView.ProductListView.setupDragAndDrop();
   }
 }

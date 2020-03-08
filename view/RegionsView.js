@@ -2,6 +2,7 @@ class RegionsView {
 
   constructor(store) {
     this.store = store;
+    this.ProductListView = new ProductListView(this.store.region);
   }
 
   present() {
@@ -36,7 +37,7 @@ class RegionsView {
 
     container.appendChild(navTabs);
     container.appendChild(tabContent);
-
+    container.appendChild(this.ProductListView.present());
     return container;
   }
 
@@ -53,5 +54,6 @@ class RegionsView {
       tabContents[i].classList.remove("show");
     }
     tab.classList.add("active", "show");
+    this.ProductListView.refreshMenu(hash);
   }
 }
