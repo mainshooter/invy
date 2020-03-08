@@ -45,11 +45,15 @@ class ProductListView {
             dropdownMenu.appendChild(item);
         }
         dropdownElement.appendChild(dropdownMenu);
+        this.setupDragAndDrop();
         return dropdownElement;
     }
 
+
+
     setupDragAndDrop() {
-        const dropzones = document.querySelector('.dropzones');
+        const dropzones = document.querySelectorAll('.dropzones');
+        console.log(dropzones);
         let el = null;
         document.querySelector('.draggable-items')
             .addEventListener(
@@ -58,20 +62,21 @@ class ProductListView {
                     el.removeAttribute('draggable');
                 }
             );
+        for(let i = 0; i < dropzones.length; i++){
+            dropzones[i].addEventListener('dragover', e => {
+                e.preventDefault();
+            });
 
-        dropzones.addEventListener('dragover', e => {
-            e.preventDefault();
-        });
 
+            dropzones[i].addEventListener('drop', e => {
+                e.preventDefault();
+                if(e.target.innerHTML === ''){
+                    e.target.appendChild(el);
+                    el = null;
+                }
 
-        dropzones.addEventListener('drop', e => {
-            e.preventDefault();
-            if(e.target.innerHTML === ''){
-                e.target.appendChild(el);
-                el = null;
-            }
-
-        });
+            });
+        }
     }
 
 
