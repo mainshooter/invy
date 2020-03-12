@@ -10,6 +10,10 @@ class Store {
       };
       this.activeRegion = this.region.kleding;
   }
+
+  save() {
+    localStorage.setItem('regions', JSON.stringify(this.region));
+  }
 }
 
 export { Store }

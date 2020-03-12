@@ -69,6 +69,7 @@ class MainController {
     newProduct.minStock = productObject.product_min_stock;
     newProduct.currentStock = productObject.product_stock;
     this.store.activeRegion.products.push(newProduct);
+    this.store.save();
   }
 }
 
