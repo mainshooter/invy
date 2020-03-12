@@ -1,6 +1,7 @@
 import { Store } from '../model/Store.js';
 import { RegionsView } from '../view/RegionsView.js';
 import { WeatherView } from '../view/WeatherView.js';
+import { CreateProductView } from '../view/CreateProductView.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
 
 class MainController {
@@ -13,13 +14,16 @@ class MainController {
   start() {
     let regionsView = new RegionsView(this.store);
     let weatherView = new WeatherView(this);
+    let createProductView = new CreateProductView(this);
     let weatherNode = weatherView.present();
     let regionNode = regionsView.present();
+    let createProductNode = createProductView.present();
     weatherNode.classList.add("col-2");
     let container = document.createElement("div");
     container.classList.add("row");
     container.appendChild(regionNode);
     container.appendChild(weatherNode);
+    container.appendChild(createProductNode);
     this.scene.setView(container);
   }
 

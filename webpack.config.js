@@ -19,9 +19,13 @@ for (var i = 0; i < views.length; i++) {
 files.push('./index.js');
 
 module.exports = {
+  mode: 'development',
   entry: files,
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '')
+  },
+  devServer: {
+    liveReload: false
   }
 }

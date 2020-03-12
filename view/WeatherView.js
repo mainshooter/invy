@@ -13,6 +13,7 @@ class WeatherView {
 
     let form = formGenerator([
       {
+        'labelText': 'Weer station',
         "type":"text",
         "id":"city",
       }
