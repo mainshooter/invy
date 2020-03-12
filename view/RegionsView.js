@@ -47,7 +47,7 @@ class RegionsView {
     let target = event.target;
     let hash = target.href;
     hash = hash.split("#")[1];
-
+    this.store.activeRegion = this.store.region[hash];
     let tab = document.querySelector("#" + hash);
 
     let tabContents = document.querySelectorAll(".tab-content .tab-pane");

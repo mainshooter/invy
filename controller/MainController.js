@@ -2,6 +2,7 @@ import { Store } from '../model/Store.js';
 import { RegionsView } from '../view/RegionsView.js';
 import { WeatherView } from '../view/WeatherView.js';
 import { CreateProductView } from '../view/CreateProductView.js';
+import { Product } from '../model/Product.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
 
 class MainController {
@@ -56,6 +57,18 @@ class MainController {
         alert("Station niet gevonden");
       }
     });
+  }
+
+  addProduct(productObject) {
+    let newProduct = new Product();
+    newProduct.name = productObject.product_name;
+    newProduct.description = productObject.product_description;
+    newProduct.buyInprice = productObject.product_buyin;
+    newProduct.sellPriceExVat = productObject.product_sell_ex;
+    newProduct.sellPriceInVat = productObject.product_sell_inc;
+    newProduct.minStock = productObject.product_min_stock;
+    newProduct.currentStock = productObject.product_stock;
+    this.store.activeRegion.products.push(newProduct);
   }
 }
 

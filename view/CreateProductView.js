@@ -3,6 +3,7 @@ import { formGenerator } from './generator/form.js';
 class CreateProductView {
 
   constructor(mainController) {
+    this.MainController = mainController;
   }
 
   present() {
@@ -44,13 +45,23 @@ class CreateProductView {
         'type': 'number',
         'id': 'product_stock',
       },
-    ]);
+    ], () => {
+      this.handleClick(form)
+    });
     container.appendChild(form);
     return container;
   }
 
-  handleClick() {
-
+  handleClick(form) {
+    this.MainController.addProduct({
+      product_name: form.querySelector('#product_name').value,
+      product_description: form.querySelector('#product_description').value,
+      product_buyin: form.querySelector('#product_buyin').value,
+      product_sell_ex: form.querySelector('#product_sell_ex').value,
+      product_sell_inc: form.querySelector('#product_sell_inc').value,
+      product_min_stock: form.querySelector('#product_min_stock').value,
+      product_stock: form.querySelector('#product_stock').value,
+    });
   }
 }
 
