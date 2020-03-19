@@ -5,6 +5,7 @@ import { CreateProductView } from '../view/CreateProductView.js';
 import { WizzardView } from '../view/wizzard/WizzardView.js';
 import { Product } from '../model/Product.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
+import elementCreater from '../view/generator/element.js';
 
 class MainController {
 
@@ -14,18 +15,25 @@ class MainController {
   }
 
   start() {
+    let firstRow = elementCreater('div', [{ 'class': 'row' }]);
     let regionsView = new RegionsView(this.store);
     let weatherView = new WeatherView(this);
     let createProductView = new CreateProductView(this);
     let weatherNode = weatherView.present();
     let regionNode = regionsView.present();
-    let createProductNode = new WizzardView().container;
+
     weatherNode.classList.add("col-2");
     let container = document.createElement("div");
-    container.classList.add("row");
-    container.appendChild(regionNode);
-    container.appendChild(weatherNode);
-    container.appendChild(createProductNode);
+    container.classList.add("container");
+    firstRow.appendChild(regionNode);
+    firstRow.appendChild(weatherNode);
+
+    let createProductNode = new WizzardView().container;
+    createProductNode.classList.add('col-12');
+    let newRow = elementCreater('div', [{ 'class': 'row' }]);
+    newRow.appendChild(createProductNode);
+    container.appendChild(firstRow);
+    container.appendChild(newRow);
     this.scene.setView(container);
   }
 

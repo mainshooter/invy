@@ -43,7 +43,9 @@ export class WizzardView {
 
   nextView() {
     this.index++;
-    this.index = this.index % this.views.length;
+    if (this.index == this.views.length) {
+      this.index--;
+    }
     this.present();
   }
 
