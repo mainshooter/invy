@@ -8,6 +8,11 @@ class Store {
         'tierlantijn': new Region('tierlantijn'),
         'decoratie': new Region('decoratie'),
       };
+      this.activeRegion = this.region.kleding;
+  }
+
+  save() {
+    localStorage.setItem('regions', JSON.stringify(this.region));
   }
 }
 
