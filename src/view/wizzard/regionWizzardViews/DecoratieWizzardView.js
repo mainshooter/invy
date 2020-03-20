@@ -36,6 +36,10 @@ export class DecoratieWizzardView {
     container.appendChild(formHolder);
     this.container = container;
   }
+  
+  getData() {
+    return this.form.getData();
+  }
 
   handleClick() {
     this.wizzardView.sendFormDataToController();

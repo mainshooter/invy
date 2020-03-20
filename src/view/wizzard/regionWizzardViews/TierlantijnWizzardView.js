@@ -27,6 +27,10 @@ export class TierlanTijdWizzardView {
     this.container = container;
   }
 
+  getData() {
+    return this.form.getData();
+  }
+
   handleClick() {
     this.wizzardView.sendFormDataToController();
   }

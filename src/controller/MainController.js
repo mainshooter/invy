@@ -29,13 +29,13 @@ class MainController {
     firstRow.appendChild(regionNode);
     firstRow.appendChild(weatherNode);
 
-    let createProductNode = new WizzardView(this.changeRegionService).container;
+    let createProductNode = new WizzardView(this.changeRegionService, this).container;
     createProductNode.classList.add('col-12');
     let newRow = elementCreater('div', [{ 'class': 'row' }]);
     newRow.appendChild(createProductNode);
     container.appendChild(firstRow);
     container.appendChild(newRow);
-    this.scene.setView(container);    
+    this.scene.setView(container);
   }
 
   presentWeather(form) {
@@ -78,6 +78,20 @@ class MainController {
     newProduct.sellPriceInVat = productObject.product_sell_inc;
     newProduct.minStock = productObject.product_min_stock;
     newProduct.currentStock = productObject.product_stock;
+
+    if (this.store.activeRegion.name == "kleding") {
+      newProduct.color = productObject.item_color;
+      newProduct.size = productObject.item_size;
+    }
+    else if (this.store.activeRegion.name == "tierlantijn") {
+      newProduct.weight = productObject.item_weight;
+    }
+    else if (this.store.activeRegion.name = "decoratie") {
+      newProduct.size = productObject.item_size;
+      newProduct.color = productObject.item_color;
+      newProduct.amount = productObject.item_amount;
+    }
+
     this.store.activeRegion.products.push(newProduct);
     this.store.save();
   }

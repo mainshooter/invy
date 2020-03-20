@@ -8,7 +8,9 @@ import { DecoratieWizzardView } from './regionWizzardViews/DecoratieWizzardView.
 
 export class WizzardView {
 
-  constructor(changeRegionService) {
+  constructor(changeRegionService, mainController) {
+    this.activeRegionName = "";
+    this.mainController =
     this.changeRegionService = changeRegionService;
 
     let container = elementCreater("div", []);
@@ -57,7 +59,6 @@ export class WizzardView {
       'tierlantijn': new TierlanTijdWizzardView(this),
       'decoratie': new DecoratieWizzardView(this),
     };
-    this.activeRegionName = "";
 
     this.views.push(new WizzardView0());
     this.views.push(new WizzardView1());
@@ -72,11 +73,13 @@ export class WizzardView {
 
   sendFormDataToController() {
     let result = [];
+    let productObject = {};
     for (let i = 0; i < this.views.length; i++) {
       let view = this.views[i];
-      result.push(view.getData());
+      Object.assign(productObject, view.getData());
     }
-    console.log(result);
+    Object.assign(productObject, this.regionWizzardViews[this.activeRegionName].getData());
+    this.mainController.addProduct(productObject);
   }
 
   nextView() {

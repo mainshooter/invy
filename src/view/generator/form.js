@@ -19,6 +19,7 @@ function formGenerator(inputFields, callBack, withSubmit) {
   });
   if (withSubmit) {
     let submit = document.createElement("input");
+    submit.classList.add('btn', 'btn-primary');
     submit.type = "submit";
     submit.addEventListener('click', event => {
       event.preventDefault();
@@ -27,14 +28,12 @@ function formGenerator(inputFields, callBack, withSubmit) {
     form.appendChild(submit);
   }
   form.getData = () => {
-    let result = [];
+    let result = {};
     let formElements = form.querySelectorAll('.form-control');
     for (let i = 0; i < formElements.length; i++) {
       let element = formElements[i];
-      console.log(element);
-      result.push({
-        "name": element.getAttribute("id"),
-        "value": element.value,
+      Object.assign(result, {
+        [element.getAttribute("id")] : element.value,
       });
     }
     return result;

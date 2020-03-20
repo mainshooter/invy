@@ -32,6 +32,10 @@ export class ClothWizzardView {
     this.container = container;
   }
 
+  getData() {
+    return this.form.getData();
+  }
+
   handleClick() {
     this.wizzardView.sendFormDataToController();
   }
