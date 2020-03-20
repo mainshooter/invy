@@ -4,19 +4,11 @@ import { WizzardView1 } from './WizzardView1.js';
 import { WizzardView2 } from './WizzardView2.js';
 import { ClothWizzardView } from './regionWizzardViews/ClothWizzardView.js';
 import { TierlanTijdWizzardView } from './regionWizzardViews/TierlantijnWizzardView.js';
-import { DecoratieTijdWizzardView } from './regionWizzardViews/DecoratieWizzardView.js';
+import { DecoratieWizzardView } from './regionWizzardViews/DecoratieWizzardView.js';
 
 export class WizzardView {
 
   constructor(changeRegionService) {
-    this.index = 0;
-    this.views = [];
-    this.regionWizzardViews = {
-      'kleding': new ClothWizzardView(this),
-      'tierlantijn': new TierlanTijdWizzardView(this),
-      'decoratie': new DecoratieWizzardView(this),
-    };
-    this.activeRegionName = "";
     this.changeRegionService = changeRegionService;
 
     let container = elementCreater("div", []);
@@ -40,24 +32,42 @@ export class WizzardView {
       this.previouseView();
     });
 
-    this.views.push(new WizzardView0());
-    this.views.push(new WizzardView1());
-    this.views.push(new WizzardView2());
-
     container.appendChild(this.wizzardViewContainer);
     container.appendChild(previouseButton);
     container.appendChild(nextButton);
 
     this.container = container;
-
+    this.prepare();
     this.present();
 
     this.changeRegionService.register((activeRegion) => {
       // Here handle switch
       this.activeRegionName = activeRegion.name;
-      console.log(this.activeRegionName);
-      console.log("service");
+      this.prepare();
+      this.present();
     });
+  }
+
+  prepare() {
+    this.clearWizzardViewContainer();
+    this.index = 0;
+    this.views = [];
+    this.regionWizzardViews = {
+      'kleding': new ClothWizzardView(this),
+      'tierlantijn': new TierlanTijdWizzardView(this),
+      'decoratie': new DecoratieWizzardView(this),
+    };
+    this.activeRegionName = "";
+
+    this.views.push(new WizzardView0());
+    this.views.push(new WizzardView1());
+    this.views.push(new WizzardView2());
+  }
+
+  clearWizzardViewContainer() {
+    while (this.wizzardViewContainer.firstChild) {
+      this.wizzardViewContainer.removeChild(this.wizzardViewContainer.lastChild);
+    }
   }
 
   sendFormDataToController() {
@@ -86,9 +96,7 @@ export class WizzardView {
   }
 
   present() {
-    while (this.wizzardViewContainer.firstChild) {
-      this.wizzardViewContainer.removeChild(this.wizzardViewContainer.lastChild);
-    }
+    this.clearWizzardViewContainer();
     if (this.index == this.views.length) {
       this.wizzardViewContainer.appendChild(this.regionWizzardViews[this.activeRegionName].container);
     }
