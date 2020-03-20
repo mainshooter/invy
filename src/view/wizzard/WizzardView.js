@@ -3,6 +3,8 @@ import { WizzardView0 } from './WizzardView0.js';
 import { WizzardView1 } from './WizzardView1.js';
 import { WizzardView2 } from './WizzardView2.js';
 import { ClothWizzardView } from './regionWizzardViews/ClothWizzardView.js';
+import { TierlanTijdWizzardView } from './regionWizzardViews/TierlantijnWizzardView.js';
+import { DecoratieTijdWizzardView } from './regionWizzardViews/DecoratieWizzardView.js';
 
 export class WizzardView {
 
@@ -11,6 +13,8 @@ export class WizzardView {
     this.views = [];
     this.regionWizzardViews = {
       'kleding': new ClothWizzardView(this),
+      'tierlantijn': new TierlanTijdWizzardView(this),
+      'decoratie': new DecoratieWizzardView(this),
     };
     this.activeRegionName = "";
     this.changeRegionService = changeRegionService;
