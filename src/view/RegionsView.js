@@ -3,8 +3,9 @@ import { TabItem } from './tab/TabItem.js';
 
 class RegionsView {
 
-  constructor(store) {
+  constructor(store, changeRegionService) {
     this.store = store;
+    this.changeRegionService = changeRegionService;
   }
 
   present() {
@@ -30,7 +31,6 @@ class RegionsView {
       });
       navTabs.appendChild(tabItems[i]);
     }
-    kledingRegionView.classList.add("active", "show")
     let tabContent = document.createElement("div");
     tabContent.classList.add("tab-content");
     tabContent.appendChild(kledingRegionView);
@@ -48,6 +48,7 @@ class RegionsView {
     let hash = target.href;
     hash = hash.split("#")[1];
     this.store.activeRegion = this.store.region[hash];
+    this.changeRegionService.changeRegion(this.store.activeRegion);
     let tab = document.querySelector("#" + hash);
 
     let tabContents = document.querySelectorAll(".tab-content .tab-pane");
