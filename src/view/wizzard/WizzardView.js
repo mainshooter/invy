@@ -10,7 +10,7 @@ export class WizzardView {
 
   constructor(changeRegionService, mainController) {
     this.activeRegionName = "";
-    this.mainController =
+    this.mainController = mainController;
     this.changeRegionService = changeRegionService;
 
     let container = elementCreater("div", []);
