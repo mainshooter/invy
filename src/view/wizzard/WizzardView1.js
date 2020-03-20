@@ -1,5 +1,6 @@
 import elementCreater from '../generator/element.js';
 import { formGenerator } from '../generator/form.js';
+import calculateExVat from '../../service/calculateExVat.js';
 
 class WizzardView1 {
 
@@ -39,10 +40,7 @@ class WizzardView1 {
     let inputPriceIncBtw = this.form.querySelector('#product_sell_inc');
     let inputPriceExBtw = this.form.querySelector('#product_sell_ex');
     inputPriceIncBtw.addEventListener('keyup', () => {
-      try {
-        let incPrice = parseFloat(inputPriceIncBtw.value);
-        inputPriceExBtw.value = (incPrice / 121 * 100).toFixed(2);
-      } catch (e) {}
+      inputPriceExBtw.value = calculateExVat(inputPriceIncBtw.value);
     });
   }
 
