@@ -9,14 +9,15 @@ import elementCreater from '../view/generator/element.js';
 
 class MainController {
 
-  constructor(scene) {
+  constructor(scene, changeRegionService) {
     this.scene = scene;
     this.store = new Store();
+    this.changeRegionService = changeRegionService;
   }
 
   start() {
     let firstRow = elementCreater('div', [{ 'class': 'row' }]);
-    let regionsView = new RegionsView(this.store);
+    let regionsView = new RegionsView(this.store, this.changeRegionService);
     let weatherView = new WeatherView(this);
     let createProductView = new CreateProductView(this);
     let weatherNode = weatherView.present();
@@ -28,13 +29,13 @@ class MainController {
     firstRow.appendChild(regionNode);
     firstRow.appendChild(weatherNode);
 
-    let createProductNode = new WizzardView().container;
+    let createProductNode = new WizzardView(this.changeRegionService).container;
     createProductNode.classList.add('col-12');
     let newRow = elementCreater('div', [{ 'class': 'row' }]);
     newRow.appendChild(createProductNode);
     container.appendChild(firstRow);
     container.appendChild(newRow);
-    this.scene.setView(container);
+    this.scene.setView(container);    
   }
 
   presentWeather(form) {

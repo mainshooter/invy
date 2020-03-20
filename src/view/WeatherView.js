@@ -17,7 +17,7 @@ class WeatherView {
         "type":"text",
         "id":"city",
       }
-    ], this.mainController.presentWeather);
+    ], this.mainController.presentWeather, true);
 
     this.container.appendChild(form);
 

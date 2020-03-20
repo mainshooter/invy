@@ -1,4 +1,4 @@
-function formGenerator(inputFields, callBack) {
+function formGenerator(inputFields, callBack, withSubmit) {
   let form = document.createElement("form");
 
   inputFields.forEach(attributes => {
@@ -17,14 +17,29 @@ function formGenerator(inputFields, callBack) {
     formGroup.appendChild(input);
     form.appendChild(formGroup);
   });
+  if (withSubmit) {
+    let submit = document.createElement("input");
+    submit.type = "submit";
+    submit.addEventListener('click', event => {
+      event.preventDefault();
+      callBack(form);
+    });
+    form.appendChild(submit);
+  }
+  form.getData = () => {
+    let result = [];
+    let formElements = form.querySelectorAll('.form-control');
+    for (let i = 0; i < formElements.length; i++) {
+      let element = formElements[i];
+      console.log(element);
+      result.push({
+        "name": element.getAttribute("id"),
+        "value": element.value,
+      });
+    }
+    return result;
+  }
 
-  let submit = document.createElement("input");
-  submit.type = "submit";
-  submit.addEventListener('click', event => {
-    event.preventDefault();
-    callBack(form);
-  });
-  form.appendChild(submit);
   return form;
 }
 
