@@ -17,7 +17,7 @@ class RegionsView {
     let decoratieRegionView = new RegionView(storeRegions.decoratie).present();
 
     let container = document.createElement("div");
-    container.classList.add("col-8");
+    container.classList.add("col-12");
     let navTabs = document.createElement("ul");
     navTabs.classList.add("nav", 'nav-tabs');
     let tabItems = [
