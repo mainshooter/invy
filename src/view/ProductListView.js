@@ -30,15 +30,16 @@ class ProductListView {
         dropdownElement.innerHTML = '';
         dropdownElement.classList.add("draggable-items");
         let dropdownMenu = document.createElement("ul");
-        for (let i = 1; i <= 3; i++){
+        for (let i = 1; i <= 3; i++) {
             let item = document.createElement("a");
             item.setAttribute("href", "#");
             item.innerText = region + i;
             let listItem = document.createElement("li");
             listItem.setAttribute("draggable", "true");
-            item.appendChild(listItem);
-            dropdownMenu.appendChild(item);
+            listItem.appendChild(item);
+            dropdownMenu.appendChild(listItem);
         }
+
         dropdownElement.appendChild(dropdownMenu);
         this.setupDragAndDrop();
         return dropdownElement;
