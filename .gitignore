@@ -1,6 +1,7 @@
-
 .idea/Invy.iml
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
 .idea/inspectionProfiles/Project_Default.xml
+bundle.js
+node_modules

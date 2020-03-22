@@ -10,3 +10,5 @@ class Region {
   }
 
 }
+
+export { Region }

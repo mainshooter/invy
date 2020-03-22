@@ -1,13 +1,9 @@
 class ProductListView {
 
-
-
     constructor(region) {
         let self = this;
         self.region = region;
     }
-
-
 
     present(){
         let container = document.createElement("div");
@@ -27,7 +23,6 @@ class ProductListView {
     }
 
     showMenu(event){
-            console.log(event);
     }
 
     refreshMenu(region){
@@ -50,10 +45,8 @@ class ProductListView {
     }
 
 
-
     setupDragAndDrop() {
         const dropzones = document.querySelectorAll('.dropzones');
-        console.log(dropzones);
         let el = null;
         document.querySelector('.draggable-items')
             .addEventListener(
@@ -67,14 +60,12 @@ class ProductListView {
                 e.preventDefault();
             });
 
-
             dropzones[i].addEventListener('drop', e => {
                 e.preventDefault();
                 if(e.target.innerHTML === ''){
                     e.target.appendChild(el);
                     el = null;
                 }
-
             });
         }
     }

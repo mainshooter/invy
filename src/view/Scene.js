@@ -9,9 +9,10 @@ class Scene {
     if (this.view != null) {
       this.appView.removeChild(this.view);
     }
-    console.log(view);
     this.appView.appendChild(view);
     this.view = view;
   }
 
 }
+
+export { Scene };

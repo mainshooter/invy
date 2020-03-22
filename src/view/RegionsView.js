@@ -1,8 +1,12 @@
+import { RegionView } from './RegionView.js';
+import { TabItem } from './tab/TabItem.js';
+
 class RegionsView {
 
-  constructor(store) {
+  constructor(store, changeRegionService) {
     this.store = store;
     this.ProductListView = new ProductListView(this.store.region);
+    this.changeRegionService = changeRegionService;
   }
 
   present() {
@@ -12,6 +16,7 @@ class RegionsView {
     let decoratieRegionView = new RegionView(storeRegions.decoratie).present();
 
     let container = document.createElement("div");
+    container.classList.add("col-8");
     let navTabs = document.createElement("ul");
     navTabs.classList.add("nav", 'nav-tabs');
     let tabItems = [
@@ -27,8 +32,6 @@ class RegionsView {
       });
       navTabs.appendChild(tabItems[i]);
     }
-
-
     let tabContent = document.createElement("div");
     tabContent.classList.add("tab-content");
     tabContent.appendChild(kledingRegionView);
@@ -45,7 +48,8 @@ class RegionsView {
     let target = event.target;
     let hash = target.href;
     hash = hash.split("#")[1];
-
+    this.store.activeRegion = this.store.region[hash];
+    this.changeRegionService.changeRegion(this.store.activeRegion);
     let tab = document.querySelector("#" + hash);
 
     let tabContents = document.querySelectorAll(".tab-content .tab-pane");
@@ -57,3 +61,5 @@ class RegionsView {
     this.ProductListView.refreshMenu(hash);
   }
 }
+
+export { RegionsView }
