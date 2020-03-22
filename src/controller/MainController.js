@@ -6,6 +6,7 @@ import { WizzardView } from '../view/wizzard/WizzardView.js';
 import { Product } from '../model/Product.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
 import elementCreater from '../view/generator/element.js';
+import uuid4 from '../helper/uuid.js';
 
 class MainController {
 
@@ -17,7 +18,7 @@ class MainController {
 
   start() {
     let firstRow = elementCreater('div', [{ 'class': 'row' }]);
-    let regionsView = new RegionsView(this.store, this.changeRegionService);
+    let regionsView = new RegionsView(this.store, this.changeRegionService, this.productChangedService);
     this.scene.setView(regionsView.present());
     regionsView.ProductListView.setupDragAndDrop();
 
@@ -75,6 +76,7 @@ class MainController {
   addProduct(productObject) {
     let newProduct = new Product();
     newProduct.name = productObject.product_name;
+    newProduct.id = uuid4();
     newProduct.description = productObject.product_description;
     newProduct.buyInprice = productObject.product_buyin;
     newProduct.sellPriceExVat = productObject.product_sell_ex;
@@ -97,6 +99,7 @@ class MainController {
 
     this.store.activeRegion.products.push(newProduct);
     this.store.save();
+    this.changeRegionService.changeRegion(this.store.activeRegion);
   }
 }
 

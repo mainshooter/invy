@@ -4,10 +4,11 @@ import { ProductListView  } from './ProductListView.js';
 
 class RegionsView {
 
-  constructor(store, changeRegionService) {
+  constructor(store, changeRegionService, productChangedService) {
     this.store = store;
-    this.ProductListView = new ProductListView(this.store.region);
+    this.productChangedService = productChangedService;
     this.changeRegionService = changeRegionService;
+    this.ProductListView = new ProductListView(this.store.region, this.changeRegionService);
   }
 
   present() {
@@ -59,7 +60,6 @@ class RegionsView {
       tabContents[i].classList.remove("show");
     }
     tab.classList.add("active", "show");
-    this.ProductListView.refreshMenu(hash);
   }
 }
 
