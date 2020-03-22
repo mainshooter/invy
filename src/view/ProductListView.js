@@ -1,3 +1,5 @@
+import uuid4 from '../helper/uuid.js';
+
 class ProductListView {
 
     constructor(region) {
@@ -32,10 +34,12 @@ class ProductListView {
         let dropdownMenu = document.createElement("ul");
         for (let i = 1; i <= 3; i++) {
             let item = document.createElement("a");
+            item.setAttribute('id', uuid4());
             item.setAttribute("href", "#");
+            item.classList.add('draggable-item');
             item.innerText = region + i;
+            item.setAttribute("draggable", "true");
             let listItem = document.createElement("li");
-            listItem.setAttribute("draggable", "true");
             listItem.appendChild(item);
             dropdownMenu.appendChild(listItem);
         }
@@ -48,14 +52,14 @@ class ProductListView {
 
     setupDragAndDrop() {
         const dropzones = document.querySelectorAll('.dropzones');
-        let el = null;
-        document.querySelector('.draggable-items')
-            .addEventListener(
-                'dragstart', e => {
-                    el = e.target.cloneNode(true);
-                    el.removeAttribute('draggable');
-                }
-            );
+
+        let dragItems = document.querySelectorAll('.draggable-item');
+        for (let i = 0; i < dragItems.length; i++) {
+          let item = dragItems[i];
+          item.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text', e.target.id);
+          });
+        }
         for(let i = 0; i < dropzones.length; i++){
             dropzones[i].addEventListener('dragover', e => {
                 e.preventDefault();
@@ -63,9 +67,14 @@ class ProductListView {
 
             dropzones[i].addEventListener('drop', e => {
                 e.preventDefault();
+                let id = e.dataTransfer.getData('text');
                 if(e.target.innerHTML === ''){
-                    e.target.appendChild(el);
-                    el = null;
+                  console.log("-------");
+                  console.log(e.target);
+                  console.log(document.getElementById(id));
+                  console.log(id);
+                  console.log("-------");
+                  e.target.appendChild(document.getElementById(id));
                 }
             });
         }
