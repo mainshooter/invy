@@ -1,11 +1,14 @@
 import { RegionView } from './RegionView.js';
 import { TabItem } from './tab/TabItem.js';
+import { ProductListView  } from './ProductListView.js';
 
 class RegionsView {
 
-  constructor(store, changeRegionService) {
+  constructor(store, changeRegionService, productChangedService) {
     this.store = store;
+    this.productChangedService = productChangedService;
     this.changeRegionService = changeRegionService;
+    this.ProductListView = new ProductListView(this.store.region, this.changeRegionService);
   }
 
   present() {
@@ -15,7 +18,7 @@ class RegionsView {
     let decoratieRegionView = new RegionView(storeRegions.decoratie).present();
 
     let container = document.createElement("div");
-    container.classList.add("col-8");
+    container.classList.add("col-12");
     let navTabs = document.createElement("ul");
     navTabs.classList.add("nav", 'nav-tabs');
     let tabItems = [
@@ -39,7 +42,7 @@ class RegionsView {
 
     container.appendChild(navTabs);
     container.appendChild(tabContent);
-
+    container.appendChild(this.ProductListView.present());
     return container;
   }
 

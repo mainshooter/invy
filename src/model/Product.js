@@ -2,6 +2,7 @@ class Product {
 
   constructor() {
     this.name;
+    this.id;
     this.description;
     this.buyInprice;
     this.sellPriceExVat;

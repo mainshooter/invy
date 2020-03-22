@@ -10,7 +10,7 @@ class RegionView {
     header.innerText = this.region.name;
 
     container.appendChild(header);
-    container.classList.add("tab-pane", "col-12");
+    container.classList.add("region-container", "tab-pane", "dropzones", "tab-pane", "col-12");
     container.setAttribute("role", "tabpanel");
     container.id = this.region.name;
 
@@ -22,13 +22,14 @@ class RegionView {
       for (let j = 0; j < row.length; j++) {
         let column = row[j];
         let columnDiv = document.createElement("div");
-        columnDiv.classList.add("col", "square");
+        columnDiv.classList.add("region-column", "dropzone", "col", "square");
         rowContainer.appendChild(columnDiv);
       }
       container.appendChild(rowContainer);
     }
     return container;
   }
+
 }
 
 export { RegionView }

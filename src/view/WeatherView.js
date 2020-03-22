@@ -2,7 +2,6 @@ import { formGenerator } from './generator/form.js';
 
 class WeatherView {
 
-
   constructor(mainController) {
     this.container = null;
     this.mainController = mainController;

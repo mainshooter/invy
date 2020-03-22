@@ -1,17 +1,29 @@
-.region-container {
-  width: 799px;
-}
 .region-row {
   display: block;
 }
+
 .region-column {
   float: left;
   width: 50px;
   height: 50px;
   border: 1px solid black;
+  list-style-type: none;
 }
+
+.dropdown {
+  float: right;
+}
+
+ul {
+  list-style-type: none;
+}
+
 .square {
   width: 50px;
   height: 50px;
   border: 1px solid black;
+}
+
+.region-column a {
+  color: red;
 }
