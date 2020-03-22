@@ -1,5 +1,6 @@
 import { RegionView } from './RegionView.js';
 import { TabItem } from './tab/TabItem.js';
+import { ProductListView  } from './ProductListView.js';
 
 class RegionsView {
 

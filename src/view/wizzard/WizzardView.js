@@ -43,7 +43,6 @@ export class WizzardView {
     this.present();
 
     this.changeRegionService.register((activeRegion) => {
-      // Here handle switch
       this.activeRegionName = activeRegion.name;
       this.prepare();
       this.present();
@@ -79,6 +78,7 @@ export class WizzardView {
       Object.assign(productObject, view.getData());
     }
     Object.assign(productObject, this.regionWizzardViews[this.activeRegionName].getData());
+    console.log(this.mainController);
     this.mainController.addProduct(productObject);
   }
 

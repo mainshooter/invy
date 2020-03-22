@@ -69,6 +69,5 @@ class ProductListView {
             });
         }
     }
-
-
 }
+export { ProductListView }

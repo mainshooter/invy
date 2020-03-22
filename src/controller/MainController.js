@@ -20,7 +20,7 @@ class MainController {
     let regionsView = new RegionsView(this.store, this.changeRegionService);
     this.scene.setView(regionsView.present());
     regionsView.ProductListView.setupDragAndDrop();
-    
+
     let weatherView = new WeatherView(this);
     let createProductView = new CreateProductView(this);
     let weatherNode = weatherView.present();
