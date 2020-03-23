@@ -1,7 +1,6 @@
 import { Store } from '../model/Store.js';
 import { RegionsView } from '../view/RegionsView.js';
 import { WeatherView } from '../view/WeatherView.js';
-import { CreateProductView } from '../view/CreateProductView.js';
 import { WizzardView } from '../view/wizzard/WizzardView.js';
 import { Product } from '../model/Product.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
@@ -28,7 +27,6 @@ class MainController {
     regionsView.ProductListView.setupDragAndDrop();
 
     let weatherView = new WeatherView(this);
-    let createProductView = new CreateProductView(this);
     let weatherNode = weatherView.present();
     let regionNode = regionsView.present();
 
