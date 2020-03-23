@@ -1,10 +1,7 @@
 import { Store } from '../model/Store.js';
-import { RegionsView } from '../view/RegionsView.js';
-import { WeatherView } from '../view/WeatherView.js';
-import { WizzardView } from '../view/wizzard/WizzardView.js';
 import { Product } from '../model/Product.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
-import elementCreater from '../view/generator/element.js';
+import { MainView } from '../view/MainView.js';
 import uuid4 from '../helper/uuid.js';
 
 class MainController {
@@ -21,28 +18,9 @@ class MainController {
   }
 
   start() {
-    let firstRow = elementCreater('div', [{ 'class': 'row' }]);
-    let regionsView = new RegionsView(this.store, this.changeRegionService, this.saveStoreService, this);
-    this.scene.setView(regionsView.present());
-    regionsView.ProductListView.setupDragAndDrop();
-
-    let weatherView = new WeatherView(this);
-    let weatherNode = weatherView.present();
-    let regionNode = regionsView.present();
-
-    weatherNode.classList.add("col-2");
-    let container = document.createElement("div");
-    container.classList.add("container");
-    firstRow.appendChild(regionNode);
-    firstRow.appendChild(weatherNode);
-
-    let createProductNode = new WizzardView(this.changeRegionService, this).container;
-    createProductNode.classList.add('col-12');
-    let newRow = elementCreater('div', [{ 'class': 'row' }]);
-    newRow.appendChild(createProductNode);
-    container.appendChild(firstRow);
-    container.appendChild(newRow);
-    this.scene.setView(container);
+    let mainView = new MainView(this.store, this.changeRegionService, this.saveStoreService, this);
+    mainView.present();
+    this.scene.setView(mainView.container);
   }
 
   presentWeather(form) {
