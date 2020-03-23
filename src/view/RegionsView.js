@@ -10,7 +10,7 @@ class RegionsView {
     this.saveStoreService = saveStoreService;
     this.regionsView = regionsView;
     this.mainController = mainController;
-    this.ProductListView = new ProductListView(this.changeRegionService, this.saveStoreService, mainController);
+    this.ProductListView = new ProductListView(this.changeRegionService, this.saveStoreService, mainController, this.regionsView);
   }
 
   present() {

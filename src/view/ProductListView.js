@@ -1,10 +1,13 @@
+import { ActionPressView } from './product/ActionPressView.js';
+
 class ProductListView {
 
-    constructor(changeRegionService, saveStoreService, mainController) {
+    constructor(changeRegionService, saveStoreService, mainController,regionsView) {
         this.region = null;
         this.changeRegionService = changeRegionService;
         this.saveStoreService = saveStoreService;
         this.mainController = mainController;
+        this.regionsView = regionsView;
         this.changeRegionService.register((region) => {
           this.refreshMenu(region);
           this.region = region;
@@ -44,6 +47,16 @@ class ProductListView {
           item.classList.add('draggable-item');
           item.innerText = product.name;
           item.setAttribute("draggable", "true");
+          item.addEventListener('click', (event) => {
+            event.preventDefault();
+            let target = event.target;
+            let actionPressView = new ActionPressView(product, this.mainController);
+            actionPressView.registerRemove(() => {
+              item.remove();
+            });
+            actionPressView.present();
+            this.regionsView.container.appendChild(actionPressView.container);
+          });
           let listItem = document.createElement("li");
           listItem.appendChild(item);
           dropdownMenu.appendChild(listItem);
