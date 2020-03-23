@@ -14,7 +14,7 @@ export class MainView {
 
   present() {
     let firstRow = elementCreater('div', [{ 'class': 'row' }]);
-    let regionsView = new RegionsView(this.store, this.changeRegionService, this.saveStoreService, this.mainController);
+    let regionsView = new RegionsView(this.store, this.changeRegionService, this.saveStoreService, this.mainController, this);
     regionsView.ProductListView.setupDragAndDrop();
 
     let weatherView = new WeatherView(this);

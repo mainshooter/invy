@@ -1,7 +1,10 @@
+import { ActionPressView } from './product/ActionPressView.js';
+
 class RegionView {
 
-  constructor(region) {
+  constructor(region, regionsView) {
     this.region = region;
+    this.regionsView = regionsView;
   }
 
   present() {
@@ -34,6 +37,13 @@ class RegionView {
           item.classList.add('draggable-item');
           item.innerText = product.name;
           item.setAttribute("draggable", "true");
+          item.addEventListener('click', (event) => {
+            event.preventDefault();
+            let target = event.target;
+            let actionPressView = new ActionPressView(product);
+            actionPressView.present();
+            this.regionsView.container.appendChild(actionPressView.container);
+          });
           columnDiv.appendChild(item);
         }
 

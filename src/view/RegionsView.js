@@ -4,18 +4,19 @@ import { ProductListView  } from './ProductListView.js';
 
 class RegionsView {
 
-  constructor(store, changeRegionService, saveStoreService, mainController) {
+  constructor(store, changeRegionService, saveStoreService, mainController, regionsView) {
     this.store = store;
     this.changeRegionService = changeRegionService;
     this.saveStoreService = saveStoreService;
+    this.regionsView = regionsView;
     this.ProductListView = new ProductListView(this.changeRegionService, this.saveStoreService, mainController);
   }
 
   present() {
     let storeRegions = this.store.region;
-    let kledingRegionView = new RegionView(storeRegions.kleding).present();
-    let tierlantijnRegionView = new RegionView(storeRegions.tierlantijn).present();
-    let decoratieRegionView = new RegionView(storeRegions.decoratie).present();
+    let kledingRegionView = new RegionView(storeRegions.kleding, this.regionsView).present();
+    let tierlantijnRegionView = new RegionView(storeRegions.tierlantijn, this.regionsView).present();
+    let decoratieRegionView = new RegionView(storeRegions.decoratie, this.regionsView).present();
 
     let container = document.createElement("div");
     container.classList.add("col-12");

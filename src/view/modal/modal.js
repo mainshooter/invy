@@ -8,15 +8,16 @@ export class Modal {
   }
 
   render() {
-    let modal = elementCreater('div', [{'role':'dialogic', 'class': 'modal'}]);
-    let modalDialog = elementCreater('div', [{'class': 'modal-dialogic'}], '');
+    let modal = elementCreater('div', [{'role':'dialog', 'class': 'modal'}]);
+    let modalDialog = elementCreater('div', [{'class': 'modal-dialog'}], '');
     let modalContent = elementCreater('div', [{'class': 'modal-content'}], '');
 
     let modalHeader = elementCreater('div', [{'class':'modal-header'}], '');
     modalHeader.appendChild(elementCreater('h5', [{'class':'modal-title'}], this.title));
 
     let modalBody = elementCreater('div', [{'class':'modal-body'}], '');
-    modalBody.appendChild(elementCreater('p', [], this.body));
+    modalBody.appendChild(this.body);
+
 
     let modalFooter = elementCreater('div', [{'class': 'modal-footer'}, '']);
     let closeButton = elementCreater('button', [{
