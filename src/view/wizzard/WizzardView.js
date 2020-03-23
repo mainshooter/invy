@@ -78,7 +78,6 @@ export class WizzardView {
       Object.assign(productObject, view.getData());
     }
     Object.assign(productObject, this.regionWizzardViews[this.activeRegionName].getData());
-    console.log(this.mainController);
     this.mainController.addProduct(productObject);
   }
 
