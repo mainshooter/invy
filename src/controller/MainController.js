@@ -10,16 +10,20 @@ import uuid4 from '../helper/uuid.js';
 
 class MainController {
 
-  constructor(scene, changeRegionService) {
+  constructor(scene, changeRegionService, saveStoreService) {
     this.scene = scene;
     this.store = new Store();
     this.store.load();
     this.changeRegionService = changeRegionService;
+    this.saveStoreService = saveStoreService;
+    this.saveStoreService.register(() => {
+      this.store.save();
+    });
   }
 
   start() {
     let firstRow = elementCreater('div', [{ 'class': 'row' }]);
-    let regionsView = new RegionsView(this.store, this.changeRegionService, this.productChangedService);
+    let regionsView = new RegionsView(this.store, this.changeRegionService, this.saveStoreService, this);
     this.scene.setView(regionsView.present());
     regionsView.ProductListView.setupDragAndDrop();
 
@@ -99,8 +103,13 @@ class MainController {
     }
 
     this.store.activeRegion.products.push(newProduct);
-    this.store.save();
+    this.saveStoreService.saveStore();
     this.changeRegionService.changeRegion(this.store.activeRegion);
+  }
+
+  placeProduct(product, x, y) {
+    this.store.activeRegion.grid[x][y] = product;
+    this.saveStoreService.saveStore();
   }
 }
 

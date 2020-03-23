@@ -23,6 +23,20 @@ class RegionView {
         let column = row[j];
         let columnDiv = document.createElement("div");
         columnDiv.classList.add("region-column", "dropzone", "col", "square");
+        columnDiv.setAttribute("x", i);
+        columnDiv.setAttribute("y", j);
+
+        if (this.region.grid[i][j]) {
+          let product = this.region.grid[i][j];
+          let item = document.createElement("a");
+          item.setAttribute('id', product.id);
+          item.setAttribute("href", "#");
+          item.classList.add('draggable-item');
+          item.innerText = product.name;
+          item.setAttribute("draggable", "true");
+          columnDiv.appendChild(item);
+        }
+
         rowContainer.appendChild(columnDiv);
       }
       container.appendChild(rowContainer);

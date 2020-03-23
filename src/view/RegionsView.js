@@ -4,11 +4,11 @@ import { ProductListView  } from './ProductListView.js';
 
 class RegionsView {
 
-  constructor(store, changeRegionService, productChangedService) {
+  constructor(store, changeRegionService, saveStoreService, mainController) {
     this.store = store;
-    this.productChangedService = productChangedService;
     this.changeRegionService = changeRegionService;
-    this.ProductListView = new ProductListView(this.store.region, this.changeRegionService);
+    this.saveStoreService = saveStoreService;
+    this.ProductListView = new ProductListView(this.changeRegionService, this.saveStoreService, mainController);
   }
 
   present() {

@@ -19,6 +19,8 @@ class Store {
     let loadedRegions = JSON.parse(localStorage.getItem('regions'));
     if (loadedRegions) {
       this.region.kleding.load(loadedRegions['kleding']);
+      this.region.tierlantijn.load(loadedRegions['tierlantijn']);
+      this.region.decoratie.load(loadedRegions['decoratie']);
     }
   }
 }
