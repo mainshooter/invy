@@ -29,6 +29,10 @@ class MainController {
     this.changeRegionService.changeRegion(this.store.activeRegion);
   }
 
+  addExtraProductValues(product, productValues) {
+
+  }
+
   presentWeather(form) {
     let city = form.querySelector("#city").value;
     fetch("https://data.buienradar.nl/2.0/feed/json")

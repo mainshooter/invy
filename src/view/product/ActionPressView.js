@@ -1,11 +1,13 @@
 import elementCreater  from '../generator/element.js';
 import { Modal } from '../modal/modal.js';
+import { ExtraProductView } from './ExtraProductView.js';
 
 export class ActionPressView {
 
-  constructor(product, mainController) {
+  constructor(product, mainController, regionsView) {
     this.product = product;
     this.mainController = mainController;
+    this.regionsView = regionsView;
     this.removeListeners = [];
   }
 
@@ -38,7 +40,13 @@ export class ActionPressView {
       this.container.remove();
     });
     editButton.addEventListener('click', () => {
-      console.log('edit');
+      let extraProductView = new ExtraProductView(this.product);
+      extraProductView.registerOnUpdate((formResult) => {
+        this.mainController.addExtraProductValues(this.product, formResult);
+      });
+      extraProductView.present();
+      console.log(this.regionsView);
+      this.regionsView.container.appendChild(extraProductView.container);
     });
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(deleteButton);
