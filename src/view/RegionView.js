@@ -2,9 +2,10 @@ import { ActionPressView } from './product/ActionPressView.js';
 
 class RegionView {
 
-  constructor(region, regionsView) {
+  constructor(region, regionsView, mainController) {
     this.region = region;
     this.regionsView = regionsView;
+    this.mainController = mainController;
   }
 
   present() {
@@ -40,7 +41,10 @@ class RegionView {
           item.addEventListener('click', (event) => {
             event.preventDefault();
             let target = event.target;
-            let actionPressView = new ActionPressView(product);
+            let actionPressView = new ActionPressView(product, this.mainController);
+            actionPressView.registerRemove(() => {
+              item.remove();
+            });
             actionPressView.present();
             this.regionsView.container.appendChild(actionPressView.container);
           });

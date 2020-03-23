@@ -3,11 +3,26 @@ import { Modal } from '../modal/modal.js';
 
 export class ActionPressView {
 
-  constructor(product) {
+  constructor(product, mainController) {
     this.product = product;
+    this.mainController = mainController;
+    this.removeListeners = [];
+  }
+
+  registerRemove(callback) {
+    this.removeListeners.push(callback);
+  }
+
+  onRemove() {
+    for (let i = 0; i < this.removeListeners.length; i++) {
+      this.removeListeners[i]();
+    }
   }
 
   present() {
+    let buttonContainer = elementCreater('div', [], '');
+    let modal = new Modal('Kies een actie', buttonContainer);
+
     let editButton = elementCreater('button', [{
       'type': 'button',
       'class': 'btn btn-primary',
@@ -18,15 +33,16 @@ export class ActionPressView {
       'class': 'btn btn-primary',
     }], 'Delete');
     deleteButton.addEventListener('click', () => {
-      console.log('delete');
+      this.mainController.deleteProduct(this.product);
+      this.onRemove();
+      this.container.remove();
     });
     editButton.addEventListener('click', () => {
       console.log('edit');
     });
-    let buttonContainer = elementCreater('div', [], '');
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(deleteButton);
-    let container = new Modal('Kies een actie', buttonContainer).render();
-    this.container = container;
+
+    this.container = modal.present();
   }
 }

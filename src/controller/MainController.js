@@ -23,6 +23,12 @@ class MainController {
     this.scene.setView(mainView.container);
   }
 
+  deleteProduct(product) {
+    this.store.activeRegion.remove(product.id);
+    this.saveStoreService.saveStore();
+    this.changeRegionService.changeRegion(this.store.activeRegion);
+  }
+
   presentWeather(form) {
     let city = form.querySelector("#city").value;
     fetch("https://data.buienradar.nl/2.0/feed/json")

@@ -7,7 +7,7 @@ export class Modal {
     this.body = body;
   }
 
-  render() {
+  present() {
     let modal = elementCreater('div', [{'role':'dialog', 'class': 'modal'}]);
     let modalDialog = elementCreater('div', [{'class': 'modal-dialog'}], '');
     let modalContent = elementCreater('div', [{'class': 'modal-content'}], '');
