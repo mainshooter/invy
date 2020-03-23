@@ -13,6 +13,7 @@ class MainController {
   constructor(scene, changeRegionService) {
     this.scene = scene;
     this.store = new Store();
+    this.store.load();
     this.changeRegionService = changeRegionService;
   }
 

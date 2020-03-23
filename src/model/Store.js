@@ -14,6 +14,13 @@ class Store {
   save() {
     localStorage.setItem('regions', JSON.stringify(this.region));
   }
+
+  load() {
+    let loadedRegions = JSON.parse(localStorage.getItem('regions'));
+    if (loadedRegions) {
+      this.region.kleding.load(loadedRegions['kleding']);
+    }
+  }
 }
 
 export { Store }
