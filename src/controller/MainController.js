@@ -45,7 +45,6 @@ class MainController {
         this.saveStoreService.saveStore();
       });
     }
-
   }
 
   addExtraProductValues(product, keys, values) {

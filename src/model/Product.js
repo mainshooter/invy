@@ -3,6 +3,7 @@ class Product {
   constructor() {
     this.name;
     this.id;
+    this.image;
     this.description;
     this.buyInprice;
     this.sellPriceExVat;
@@ -15,6 +16,7 @@ class Product {
   load(productObject) {
     this.name = productObject.name;
     this.id = productObject.id;
+    this.image = productObject.image;
     this.description = productObject.description;
     this.buyInprice = productObject.buyInprice;
     this.sellPriceExVat = productObject.sellPriceExVat;
