@@ -11,6 +11,7 @@ class Product {
     this.minStock;
     this.currentStock;
     this.properties = [];
+    this.drawings = [];
   }
 
   load(productObject) {
@@ -24,6 +25,7 @@ class Product {
     this.minStock = productObject.minStock;
     this.currentStock = productObject.currentStock;
     this.properties = productObject.properties;
+    this.drawings = productObject.drawings;
   }
 }
 

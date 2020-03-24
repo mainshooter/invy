@@ -47,6 +47,11 @@ class MainController {
     }
   }
 
+  saveProduct(product) {
+    this.store.activeRegion.update(product);
+    this.saveStoreService.saveStore();
+  }
+
   addExtraProductValues(product, keys, values) {
     let newAttributes = [];
     for (let i = 0; i < keys.length; i++) {

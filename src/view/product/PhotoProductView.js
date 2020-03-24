@@ -7,6 +7,7 @@ export class PhotoProductView {
   constructor(product, mainController) {
     this.mainController = mainController;
     this.product = product;
+    this.drawings = [];
   }
 
   present() {
@@ -14,11 +15,21 @@ export class PhotoProductView {
     let modal = new Modal('Voeg product opties toe', bodyContainer);
 
     this.drawCanvas = elementCreater('canvas', [{}], '');
+
+    if (Array.isArray(this.product.drawings)) {
+      this.drawings = this.product.drawings;
+    }
+
     if (this.product.image) {
       let ctx = this.drawCanvas.getContext("2d");
       let image = new Image();
       image.onload = () => {
         ctx.drawImage(image, 5, 5);
+        for (let i = 0; i < this.drawings.length; i++) {
+          let drawing = this.drawings[i];
+          ctx.fillStyle = "green";
+          ctx.fillRect(drawing.x, drawing.y, 5, 5);
+        }
       }
       image.src = this.product.image;
       this.addDrawAction();
@@ -50,6 +61,8 @@ export class PhotoProductView {
     });
     this.drawCanvas.addEventListener('mouseup', e => {
       canDraw = false;
+      this.product.drawings = this.drawings;
+      this.mainController.saveProduct(this.product);
     });
 
     this.drawCanvas.addEventListener('mousemove', e => {
@@ -60,6 +73,10 @@ export class PhotoProductView {
         let y = e.clientY - rect.top;
         ctx.fillStyle = "green";
         ctx.fillRect(x, y, 5, 5);
+        this.drawings.push({
+          'x': x,
+          'y': y,
+        });
       }
     });
   }
