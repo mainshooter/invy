@@ -1,6 +1,7 @@
 import elementCreater  from '../generator/element.js';
 import { Modal } from '../modal/modal.js';
 import { ExtraProductView } from './ExtraProductView.js';
+import { PhotoProductView } from './PhotoProductView.js';
 
 export class ActionPressView {
 
@@ -25,6 +26,11 @@ export class ActionPressView {
     let buttonContainer = elementCreater('div', [], '');
     let modal = new Modal('Kies een actie', buttonContainer);
 
+    let uploadButton = elementCreater('button', [{
+      'type': 'button',
+      'class': 'btn btn-primary',
+    }], 'Foto uploaden');
+
     let editButton = elementCreater('button', [{
       'type': 'button',
       'class': 'btn btn-primary',
@@ -39,6 +45,11 @@ export class ActionPressView {
       this.onRemove();
       this.container.remove();
     });
+    uploadButton.addEventListener('click', () => {
+      let photoProductView = new PhotoProductView(this.product, this.mainController);
+      photoProductView.present();
+      this.regionsView.container.appendChild(photoProductView.container);
+    });
     editButton.addEventListener('click', () => {
       let extraProductView = new ExtraProductView(this.product, this.mainController);
       extraProductView.present();
@@ -46,6 +57,7 @@ export class ActionPressView {
     });
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(deleteButton);
+    buttonContainer.appendChild(uploadButton);
 
     this.container = modal.present();
   }
