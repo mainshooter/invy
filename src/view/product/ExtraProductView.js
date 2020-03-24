@@ -4,19 +4,10 @@ import { formGenerator } from '../generator/form.js';
 
 export class ExtraProductView {
 
-  constructor(product) {
+  constructor(product, mainController) {
+    this.mainController = mainController;
     this.product = product;
     this.register = [];
-  }
-
-  registerOnUpdate(callback) {
-    this.register.push(callback);
-  }
-
-  onUpdate(formResult) {
-    for (let i = 0; i < this.register.length; i++) {
-      this.register[i](formResult);
-    }
   }
 
   present() {
@@ -24,7 +15,6 @@ export class ExtraProductView {
     let modal = new Modal('Voeg product opties toe', bodyContainer);
 
     let form = formGenerator([], () =>{}, false);
-
     for (let i = 0; i < this.product.properties.length; i++) {
       let property = this.product.properties[i];
       form.appendChild(this.generateNewRow(property.key, property.value));
@@ -41,19 +31,17 @@ export class ExtraProductView {
     }], 'Opslaan');
 
     saveButton.addEventListener('click', () => {
-      let keys = form.querySelectorAll('input[name=key[]]');
-      let values = form.querySelectorAll('input[name=value[]]');
+      let keys = form.querySelectorAll('.key');
+      let values = form.querySelectorAll('.value');
 
       this.mainController.addExtraProductValues(this.product, keys, values);
-
-      this.onUpdate();
       this.container.remove();
     });
     addRowButton.addEventListener('click', () => {
       form.appendChild(this.generateNewRow('', ''));
     });
-    form.appendChild(addRowButton);
     bodyContainer.appendChild(form);
+    bodyContainer.appendChild(addRowButton);
     bodyContainer.appendChild(saveButton);
 
     this.container = modal.present();
@@ -68,13 +56,15 @@ export class ExtraProductView {
     let valueKey = elementCreater('input', [{
       'type': 'text',
       'name': 'key[]',
-      'class': 'form-control',
+      'class': 'form-control key',
+      'value': key,
     }], '');
     let labelValue = elementCreater('label', [], 'Value');
     let valueValue = elementCreater('input', [{
       'type': 'text',
       'name': 'value[]',
-      'class': 'form-control',
+      'class': 'form-control value',
+      'value': value,
     }], '');
     keyContainer.appendChild(labelKey);
     keyContainer.appendChild(valueKey);

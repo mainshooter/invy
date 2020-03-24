@@ -36,12 +36,13 @@ class MainController {
       let value = values[i];
 
       newAttributes.push({
-        'key': key,
-        'value': value,
+        'key': key.value,
+        'value': value.value,
       });
     }
     product.properties = newAttributes;
     this.store.activeRegion.update(product);
+    this.saveStoreService.saveStore();
   }
 
   presentWeather(form) {

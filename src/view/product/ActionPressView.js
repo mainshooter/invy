@@ -40,12 +40,8 @@ export class ActionPressView {
       this.container.remove();
     });
     editButton.addEventListener('click', () => {
-      let extraProductView = new ExtraProductView(this.product);
-      extraProductView.registerOnUpdate((formResult) => {
-        this.mainController.addExtraProductValues(this.product, formResult);
-      });
+      let extraProductView = new ExtraProductView(this.product, this.mainController);
       extraProductView.present();
-      console.log(this.regionsView);
       this.regionsView.container.appendChild(extraProductView.container);
     });
     buttonContainer.appendChild(editButton);

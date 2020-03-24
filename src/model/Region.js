@@ -78,7 +78,27 @@ class Region {
   }
 
   update(product) {
-
+    for (let i = 0; i < this.products.length; i++) {
+      let productId = this.products[i];
+      if (productId == product.id) {
+        this.products[i] = product;
+        return true;
+      }
+    }
+    for (let i = 0; i < this.grid.length; i++) {
+      let row = this.grid[i];
+      for (let j = 0; j < row.length; j++) {
+        let column = row[j];
+        if (column) {
+          let productId = column.id;
+          if (productId == product.id) {
+            this.grid[i][j] = product;
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
 }
