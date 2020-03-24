@@ -15,11 +15,11 @@ export class MainView {
   present() {
     let firstRow = elementCreater('div', [{ 'class': 'row' }]);
     let regionsView = new RegionsView(this.store, this.changeRegionService, this.saveStoreService, this.mainController, this);
-    regionsView.ProductListView.setupDragAndDrop();
 
     let weatherView = new WeatherView(this);
     let weatherNode = weatherView.present();
     let regionNode = regionsView.present();
+    regionsView.ProductListView.setupDragAndDrop();
 
     weatherNode.classList.add("col-2");
     let container = document.createElement("div");

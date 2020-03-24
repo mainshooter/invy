@@ -12,6 +12,7 @@ class Product {
     this.currentStock;
     this.properties = [];
     this.drawings = [];
+    this.comment = '';
   }
 
   load(productObject) {
@@ -26,6 +27,7 @@ class Product {
     this.currentStock = productObject.currentStock;
     this.properties = productObject.properties;
     this.drawings = productObject.drawings;
+    this.comment = productObject.comment;
   }
 }
 

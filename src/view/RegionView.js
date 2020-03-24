@@ -32,23 +32,9 @@ class RegionView {
 
         if (this.region.grid[i][j]) {
           let product = this.region.grid[i][j];
-          let item = document.createElement("a");
-          item.setAttribute('id', product.id);
-          item.setAttribute("href", "#");
-          item.classList.add('draggable-item');
-          item.innerText = product.name;
-          item.setAttribute("draggable", "true");
-          item.addEventListener('click', (event) => {
-            event.preventDefault();
-            let target = event.target;
-            let actionPressView = new ActionPressView(product, this.mainController, this.regionsView);
-            actionPressView.registerRemove(() => {
-              item.remove();
-            });
-            actionPressView.present();
-            this.regionsView.container.appendChild(actionPressView.container);
-          });
-          columnDiv.appendChild(item);
+          let itemView = new DragItemView(product, this.mainController, this.regionsView);
+          itemView.present();
+          columnDiv.appendChild(itemView.item);
         }
 
         rowContainer.appendChild(columnDiv);

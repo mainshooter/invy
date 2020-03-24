@@ -13,6 +13,8 @@ export class PhotoProductView {
   present() {
     let bodyContainer = elementCreater('div', [], '');
     let modal = new Modal('Voeg product opties toe', bodyContainer);
+    let photoContainer = elementCreater('div', [{}], '');
+    let commentContainer = elementCreater('div', [{}], '');
 
     this.drawCanvas = elementCreater('canvas', [{}], '');
 
@@ -44,8 +46,27 @@ export class PhotoProductView {
         this.mainController.saveProductUpload(this.product, uploadField);
         this.addDrawAction();
     }, true);
-    bodyContainer.appendChild(this.drawCanvas);
-    bodyContainer.appendChild(form);
+
+    let commentForm = formGenerator([{
+      'labelText': 'Commentaar',
+      'name': 'product_comment',
+      'type': 'text',
+      'class': 'form-control',
+      'value': this.product.comment
+    }], () => {
+      let comment = commentForm.querySelector('input[name=product_comment]').value;
+      this.product.comment = comment;
+      this.mainController.saveProduct(this.product);
+    });
+
+
+    photoContainer.appendChild(this.drawCanvas);
+    photoContainer.appendChild(form);
+
+    commentContainer.appendChild(commentForm);
+
+    bodyContainer.appendChild(photoContainer);
+    bodyContainer.appendChild(commentContainer);
 
     this.container = modal.present();
   }
