@@ -41,7 +41,11 @@ export class ExtraProductView {
     }], 'Opslaan');
 
     saveButton.addEventListener('click', () => {
-      this.mainController.saveProduct(this.product);
+      let keys = form.querySelectorAll('input[name=key[]]');
+      let values = form.querySelectorAll('input[name=value[]]');
+
+      this.mainController.addExtraProductValues(this.product, keys, values);
+
       this.onUpdate();
       this.container.remove();
     });

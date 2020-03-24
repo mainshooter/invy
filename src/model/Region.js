@@ -77,6 +77,10 @@ class Region {
     return null;
   }
 
+  update(product) {
+
+  }
+
 }
 
 export { Region }
