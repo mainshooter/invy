@@ -1,4 +1,5 @@
 import { ActionPressView } from './product/ActionPressView.js';
+import { DragItemView } from './DragItemView.js';
 
 class RegionView {
 
