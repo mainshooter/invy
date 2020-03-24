@@ -23,7 +23,6 @@ export class DragItemView {
         item.remove();
       });
       actionPressView.present();
-      console.log(this.regionsView);
       this.regionsView.container.appendChild(actionPressView.container);
     });
     this.item = item;

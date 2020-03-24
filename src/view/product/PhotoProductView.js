@@ -57,7 +57,7 @@ export class PhotoProductView {
       let comment = commentForm.querySelector('input[name=product_comment]').value;
       this.product.comment = comment;
       this.mainController.saveProduct(this.product);
-    });
+    }, true);
 
 
     photoContainer.appendChild(this.drawCanvas);
