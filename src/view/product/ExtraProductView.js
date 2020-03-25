@@ -7,7 +7,6 @@ export class ExtraProductView {
   constructor(product, mainController) {
     this.mainController = mainController;
     this.product = product;
-    this.register = [];
   }
 
   present() {

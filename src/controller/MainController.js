@@ -29,6 +29,25 @@ class MainController {
     this.changeRegionService.changeRegion(this.store.activeRegion);
   }
 
+  saveProductUpload(product, uploadField) {
+    for (let i = 0; i < uploadField.files.length; i++) {
+      let file = uploadField.files[i];
+      let promise = new Promise((resolve, error) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+          resolve(reader.result);
+        }
+      });
+      promise.then((imageBlob) => {
+        product.image = imageBlob;
+        this.store.activeRegion.update(product);
+        this.saveStoreService.saveStore();
+      });
+    }
+
+  }
+
   addExtraProductValues(product, keys, values) {
     let newAttributes = [];
     for (let i = 0; i < keys.length; i++) {
