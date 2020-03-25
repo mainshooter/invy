@@ -27,3 +27,7 @@ ul {
 .region-column a {
   color: red;
 }
+
+.modal {
+  display: block;
+}

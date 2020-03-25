@@ -14,6 +14,15 @@ class Store {
   save() {
     localStorage.setItem('regions', JSON.stringify(this.region));
   }
+
+  load() {
+    let loadedRegions = JSON.parse(localStorage.getItem('regions'));
+    if (loadedRegions) {
+      this.region.kleding.load(loadedRegions['kleding']);
+      this.region.tierlantijn.load(loadedRegions['tierlantijn']);
+      this.region.decoratie.load(loadedRegions['decoratie']);
+    }
+  }
 }
 
 export { Store }

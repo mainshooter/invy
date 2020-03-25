@@ -1,10 +1,16 @@
+import { ActionPressView } from './product/ActionPressView.js';
+
 class ProductListView {
 
-    constructor(region, changeRegionService) {
-        this.region = region;
+    constructor(changeRegionService, saveStoreService, mainController,regionsView) {
+        this.region = null;
         this.changeRegionService = changeRegionService;
+        this.saveStoreService = saveStoreService;
+        this.mainController = mainController;
+        this.regionsView = regionsView;
         this.changeRegionService.register((region) => {
           this.refreshMenu(region);
+          this.region = region;
         });
     }
 
@@ -41,6 +47,16 @@ class ProductListView {
           item.classList.add('draggable-item');
           item.innerText = product.name;
           item.setAttribute("draggable", "true");
+          item.addEventListener('click', (event) => {
+            event.preventDefault();
+            let target = event.target;
+            let actionPressView = new ActionPressView(product, this.mainController);
+            actionPressView.registerRemove(() => {
+              item.remove();
+            });
+            actionPressView.present();
+            this.regionsView.container.appendChild(actionPressView.container);
+          });
           let listItem = document.createElement("li");
           listItem.appendChild(item);
           dropdownMenu.appendChild(listItem);
@@ -71,8 +87,16 @@ class ProductListView {
                 e.preventDefault();
                 let id = e.dataTransfer.getData('text');
                 if(e.target.innerHTML === ''){
-                  e.target.appendChild(document.getElementById(id));
+                  let element = document.getElementById(id);
+                  let product = this.region.find(id);
+                  let target = e.target;
+                  let x = target.getAttribute("x");
+                  let y = target.getAttribute("y");
+                  target.appendChild(element);
+                  this.region.remove(id);
+                  this.mainController.placeProduct(product, x, y);
                 }
+                this.saveStoreService.saveStore();
             });
         }
     }

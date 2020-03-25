@@ -1,45 +1,32 @@
 import { Store } from '../model/Store.js';
-import { RegionsView } from '../view/RegionsView.js';
-import { WeatherView } from '../view/WeatherView.js';
-import { CreateProductView } from '../view/CreateProductView.js';
-import { WizzardView } from '../view/wizzard/WizzardView.js';
 import { Product } from '../model/Product.js';
 import { generateWeatherMessage } from '../view/generator/weatherGenerator.js';
-import elementCreater from '../view/generator/element.js';
+import { MainView } from '../view/MainView.js';
 import uuid4 from '../helper/uuid.js';
 
 class MainController {
 
-  constructor(scene, changeRegionService) {
+  constructor(scene, changeRegionService, saveStoreService) {
     this.scene = scene;
     this.store = new Store();
+    this.store.load();
     this.changeRegionService = changeRegionService;
+    this.saveStoreService = saveStoreService;
+    this.saveStoreService.register(() => {
+      this.store.save();
+    });
   }
 
   start() {
-    let firstRow = elementCreater('div', [{ 'class': 'row' }]);
-    let regionsView = new RegionsView(this.store, this.changeRegionService, this.productChangedService);
-    this.scene.setView(regionsView.present());
-    regionsView.ProductListView.setupDragAndDrop();
+    let mainView = new MainView(this.store, this.changeRegionService, this.saveStoreService, this);
+    mainView.present();
+    this.scene.setView(mainView.container);
+  }
 
-    let weatherView = new WeatherView(this);
-    let createProductView = new CreateProductView(this);
-    let weatherNode = weatherView.present();
-    let regionNode = regionsView.present();
-
-    weatherNode.classList.add("col-2");
-    let container = document.createElement("div");
-    container.classList.add("container");
-    firstRow.appendChild(regionNode);
-    firstRow.appendChild(weatherNode);
-
-    let createProductNode = new WizzardView(this.changeRegionService, this).container;
-    createProductNode.classList.add('col-12');
-    let newRow = elementCreater('div', [{ 'class': 'row' }]);
-    newRow.appendChild(createProductNode);
-    container.appendChild(firstRow);
-    container.appendChild(newRow);
-    this.scene.setView(container);
+  deleteProduct(product) {
+    this.store.activeRegion.remove(product.id);
+    this.saveStoreService.saveStore();
+    this.changeRegionService.changeRegion(this.store.activeRegion);
   }
 
   presentWeather(form) {
@@ -98,8 +85,13 @@ class MainController {
     }
 
     this.store.activeRegion.products.push(newProduct);
-    this.store.save();
+    this.saveStoreService.saveStore();
     this.changeRegionService.changeRegion(this.store.activeRegion);
+  }
+
+  placeProduct(product, x, y) {
+    this.store.activeRegion.grid[x][y] = product;
+    this.saveStoreService.saveStore();
   }
 }
 
