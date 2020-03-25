@@ -1,6 +1,5 @@
 import { RegionsView } from '../view/RegionsView.js';
 import { WeatherView } from '../view/WeatherView.js';
-import { WizzardView } from '../view/wizzard/WizzardView.js';
 import elementCreater from './generator/element.js';
 
 export class MainView {
@@ -27,12 +26,7 @@ export class MainView {
     firstRow.appendChild(regionNode);
     firstRow.appendChild(weatherNode);
 
-    let createProductNode = new WizzardView(this.changeRegionService, this.mainController).container;
-    createProductNode.classList.add('col-12');
-    let newRow = elementCreater('div', [{ 'class': 'row' }]);
-    newRow.appendChild(createProductNode);
     container.appendChild(firstRow);
-    container.appendChild(newRow);
 
     this.container = container;
   }
