@@ -41,7 +41,7 @@ class RegionView {
           item.addEventListener('click', (event) => {
             event.preventDefault();
             let target = event.target;
-            let actionPressView = new ActionPressView(product, this.mainController);
+            let actionPressView = new ActionPressView(product, this.mainController, this.regionsView);
             actionPressView.registerRemove(() => {
               item.remove();
             });

@@ -9,7 +9,7 @@ class Product {
     this.sellPriceInVat;
     this.minStock;
     this.currentStock;
-    this.properties;
+    this.properties = [];
   }
 
   load(productObject) {

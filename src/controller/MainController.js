@@ -29,6 +29,22 @@ class MainController {
     this.changeRegionService.changeRegion(this.store.activeRegion);
   }
 
+  addExtraProductValues(product, keys, values) {
+    let newAttributes = [];
+    for (let i = 0; i < keys.length; i++) {
+      let key = keys[i];
+      let value = values[i];
+
+      newAttributes.push({
+        'key': key.value,
+        'value': value.value,
+      });
+    }
+    product.properties = newAttributes;
+    this.store.activeRegion.update(product);
+    this.saveStoreService.saveStore();
+  }
+
   presentWeather(form) {
     let city = form.querySelector("#city").value;
     fetch("https://data.buienradar.nl/2.0/feed/json")

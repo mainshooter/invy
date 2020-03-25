@@ -31,3 +31,8 @@ ul {
 .modal {
   display: block;
 }
+
+.modal-body {
+  height: 400px;
+  overflow: scroll;
+}
