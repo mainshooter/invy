@@ -15,9 +15,9 @@ class RegionsView {
 
   present() {
     let storeRegions = this.store.region;
-    let kledingRegionView = new RegionView(storeRegions.kleding, this.regionsView, this.mainController).present();
-    let tierlantijnRegionView = new RegionView(storeRegions.tierlantijn, this.regionsView, this.mainController).present();
-    let decoratieRegionView = new RegionView(storeRegions.decoratie, this.regionsView, this.mainController).present();
+    let kledingRegionView = new RegionView(storeRegions.kleding, this.regionsView, this.mainController, this.changeRegionService).present();
+    let tierlantijnRegionView = new RegionView(storeRegions.tierlantijn, this.regionsView, this.mainController, this.changeRegionService).present();
+    let decoratieRegionView = new RegionView(storeRegions.decoratie, this.regionsView, this.mainController, this.changeRegionService).present();
     this.ProductListView.present()
 
     let container = document.createElement("div");

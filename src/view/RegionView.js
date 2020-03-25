@@ -1,12 +1,16 @@
 import { ActionPressView } from './product/ActionPressView.js';
 import { DragItemView } from './DragItemView.js';
+import { WizzardView } from '../view/wizzard/WizzardView.js';
+import elementCreater from './generator/element.js';
+
 
 class RegionView {
 
-  constructor(region, regionsView, mainController) {
+  constructor(region, regionsView, mainController, changeRegionService) {
     this.region = region;
     this.regionsView = regionsView;
     this.mainController = mainController;
+    this.changeRegionService = changeRegionService;
   }
 
   present() {
@@ -18,6 +22,11 @@ class RegionView {
     container.classList.add("region-container", "tab-pane", "dropzones", "tab-pane", "col-12");
     container.setAttribute("role", "tabpanel");
     container.id = this.region.name;
+
+    let createProductNode = new WizzardView(this.changeRegionService, this.mainController).container;
+    createProductNode.classList.add('col-12');
+    let newRow = elementCreater('div', [{ 'class': 'row' }]);
+    newRow.appendChild(createProductNode);
 
     let grid = this.region.grid;
     for (let i = 0; i < grid.length; i++) {
@@ -42,6 +51,7 @@ class RegionView {
       }
       container.appendChild(rowContainer);
     }
+    container.appendChild(newRow);
     return container;
   }
 
