@@ -18,6 +18,7 @@ class RegionsView {
     let kledingRegionView = new RegionView(storeRegions.kleding, this.regionsView, this.mainController).present();
     let tierlantijnRegionView = new RegionView(storeRegions.tierlantijn, this.regionsView, this.mainController).present();
     let decoratieRegionView = new RegionView(storeRegions.decoratie, this.regionsView, this.mainController).present();
+    this.ProductListView.present()
 
     let container = document.createElement("div");
     container.classList.add("col-12");
@@ -44,7 +45,7 @@ class RegionsView {
 
     container.appendChild(navTabs);
     container.appendChild(tabContent);
-    container.appendChild(this.ProductListView.present());
+    container.appendChild(this.ProductListView.container);
     return container;
   }
 

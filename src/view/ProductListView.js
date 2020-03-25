@@ -1,4 +1,4 @@
-import { ActionPressView } from './product/ActionPressView.js';
+import { DragItemView } from './DragItemView.js';
 
 class ProductListView {
 
@@ -28,7 +28,7 @@ class ProductListView {
         dropdownMenuDiv.classList.add("draggable-items");
         container.appendChild(header);
         container.appendChild(dropdownMenuDiv);
-        return container;
+        this.container = container;
     }
 
     showMenu(event){
@@ -41,24 +41,10 @@ class ProductListView {
         let dropdownMenu = document.createElement("ul");
         for (let i = 0; i < region.products.length; i++) {
           let product = region.products[i];
-          let item = document.createElement("a");
-          item.setAttribute('id', product.id);
-          item.setAttribute("href", "#");
-          item.classList.add('draggable-item');
-          item.innerText = product.name;
-          item.setAttribute("draggable", "true");
-          item.addEventListener('click', (event) => {
-            event.preventDefault();
-            let target = event.target;
-            let actionPressView = new ActionPressView(product, this.mainController);
-            actionPressView.registerRemove(() => {
-              item.remove();
-            });
-            actionPressView.present();
-            this.regionsView.container.appendChild(actionPressView.container);
-          });
+          let itemView = new DragItemView(product, this.mainController, this.regionsView);
+          itemView.present();
           let listItem = document.createElement("li");
-          listItem.appendChild(item);
+          listItem.appendChild(itemView.item);
           dropdownMenu.appendChild(listItem);
         }
 
