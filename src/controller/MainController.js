@@ -45,7 +45,11 @@ class MainController {
         this.saveStoreService.saveStore();
       });
     }
+  }
 
+  saveProduct(product) {
+    this.store.activeRegion.update(product);
+    this.saveStoreService.saveStore();
   }
 
   addExtraProductValues(product, keys, values) {

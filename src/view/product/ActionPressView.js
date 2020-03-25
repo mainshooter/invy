@@ -29,7 +29,7 @@ export class ActionPressView {
     let uploadButton = elementCreater('button', [{
       'type': 'button',
       'class': 'btn btn-primary',
-    }], 'Foto uploaden');
+    }], 'Tekenen');
 
     let editButton = elementCreater('button', [{
       'type': 'button',
