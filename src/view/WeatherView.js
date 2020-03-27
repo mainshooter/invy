@@ -9,7 +9,6 @@ class WeatherView {
 
   present() {
     this.container = document.createElement("div");
-    console.log(this.mainController);
     let form = formGenerator([
       {
         'labelText': 'Weer station',
