@@ -18,7 +18,6 @@ class Store {
     } catch (e) {
       return false;
     }
-
   }
 
   load() {

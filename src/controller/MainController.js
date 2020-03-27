@@ -40,8 +40,12 @@ class MainController {
       reader.onloadend = () => {
         product.image = reader.result;
         this.store.activeRegion.update(product);
-        this.store.save();
-        resolve(product);
+        if (this.store.save()) {
+          resolve(product);
+        }
+        else {
+          resolve(false);
+        }
       }
     });
 
