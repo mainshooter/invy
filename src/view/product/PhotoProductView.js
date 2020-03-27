@@ -37,7 +37,6 @@ export class PhotoProductView {
         this.product.drawings = this.drawings;
         let uploadField = form.querySelector('.file_upload');
         this.mainController.saveProductUpload(this.product, uploadField);
-        console.log(this.product);
         this.addPhoto();
     }, true);
 
