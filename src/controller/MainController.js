@@ -34,18 +34,14 @@ class MainController {
       return;
     }
     return new Promise(resolve => {
-      try {
-        let file = uploadField.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-          product.image = reader.result;
-          this.store.activeRegion.update(product);
-          this.saveStoreService.saveStore();
-          resolve(product);
-        }
-      } catch (e) {
-        resolve(false);
+      let file = uploadField.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        product.image = reader.result;
+        this.store.activeRegion.update(product);
+        this.store.save();
+        resolve(product);
       }
     });
 

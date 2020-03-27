@@ -12,7 +12,13 @@ class Store {
   }
 
   save() {
-    localStorage.setItem('regions', JSON.stringify(this.region));
+    try {
+      localStorage.setItem('regions', JSON.stringify(this.region));
+      return true;
+    } catch (e) {
+      return false;
+    }
+
   }
 
   load() {
