@@ -30,21 +30,21 @@ class MainController {
   }
 
   saveProductUpload(product, uploadField) {
-    for (let i = 0; i < uploadField.files.length; i++) {
-      let file = uploadField.files[i];
-      let promise = new Promise((resolve, error) => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function () {
-          resolve(reader.result);
-        }
-      });
-      promise.then((imageBlob) => {
-        product.image = imageBlob;
+    if (uploadField.files.length != 1) {
+      return;
+    }
+    return new Promise(resolve => {
+      let file = uploadField.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        product.image = reader.result;
         this.store.activeRegion.update(product);
         this.saveStoreService.saveStore();
-      });
-    }
+        resolve(product);
+      }
+    });
+
   }
 
   saveProduct(product) {

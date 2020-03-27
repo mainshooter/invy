@@ -25,7 +25,7 @@ export class PhotoProductView {
     }
 
     if (this.product.image) {
-      this.addPhoto();
+      this.addPhoto(this.product.image);
     }
     let form = formGenerator([{
       'labelText': 'Foto uploaden',
@@ -36,8 +36,10 @@ export class PhotoProductView {
         this.drawings = [];
         this.product.drawings = this.drawings;
         let uploadField = form.querySelector('.file_upload');
-        this.mainController.saveProductUpload(this.product, uploadField);
-        this.addPhoto();
+        let savePromise = this.mainController.saveProductUpload(this.product, uploadField);
+        savePromise.then(product => {
+          this.addPhoto();
+        });
     }, true);
 
     let commentForm = formGenerator([{
@@ -68,6 +70,7 @@ export class PhotoProductView {
     let ctx = this.drawCanvas.getContext("2d");
     ctx.clearRect(0, 0, 300, 300);
     let image = new Image();
+    image.src = this.product.image;
     image.onload = () => {
       ctx.drawImage(image, 0, 0, 300, 300);
       for (let i = 0; i < this.drawings.length; i++) {
@@ -77,7 +80,6 @@ export class PhotoProductView {
       }
       this.addDrawAction();
     }
-    image.src = this.product.image;
   }
 
   addDrawAction() {
