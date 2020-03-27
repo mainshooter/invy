@@ -82,10 +82,6 @@ class ProductListView {
                   let target = e.target;
                   let x = target.getAttribute("x");
                   let y = target.getAttribute("y");
-                  console.log('----------------');
-                  console.log(element);
-                  console.log(target);
-                  console.log('----------------');
                   target.appendChild(element);
                   this.region.remove(id);
                   this.mainController.placeProduct(product, x, y);

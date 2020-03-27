@@ -37,8 +37,14 @@ export class PhotoProductView {
         this.product.drawings = this.drawings;
         let uploadField = form.querySelector('.file_upload');
         let savePromise = this.mainController.saveProductUpload(this.product, uploadField);
-        savePromise.then(product => {
-          this.addPhoto();
+        savePromise.then(mResult => {
+          if (mResult == false) {
+            // Upload faild
+            alert("Opslag zit vol!");
+          }
+          else {
+            this.addPhoto();
+          }
         });
     }, true);
 
