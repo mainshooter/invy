@@ -99,6 +99,13 @@ class MainController {
     });
   }
 
+  validateAddProductData(productObject) {
+    let name = productObject.product_name;
+
+    return !(!name || /^\s*$/.test(name));
+    // Check for whitespace or nothing
+  }
+
   addProduct(productObject) {
     let newProduct = new Product();
     newProduct.name = productObject.product_name;

@@ -78,7 +78,12 @@ export class WizzardView {
       Object.assign(productObject, view.getData());
     }
     Object.assign(productObject, this.regionWizzardViews[this.activeRegionName].getData());
-    this.mainController.addProduct(productObject);
+    if (this.mainController.validateAddProductData(productObject)) {
+      this.mainController.addProduct(productObject);
+    }
+    else {
+      alert("Voer minimaal een naam in");
+    }
   }
 
   nextView() {
