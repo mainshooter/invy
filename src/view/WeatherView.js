@@ -9,14 +9,16 @@ class WeatherView {
 
   present() {
     this.container = document.createElement("div");
-
+    console.log(this.mainController);
     let form = formGenerator([
       {
         'labelText': 'Weer station',
         "type":"text",
         "id":"city",
       }
-    ], this.mainController.presentWeather, true);
+    ], () => {
+      this.mainController.presentWeather(form);
+    }, true);
 
     this.container.appendChild(form);
 

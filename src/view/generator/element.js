@@ -8,7 +8,6 @@ module.exports = (type, attributesArray, text) => {
     }
   }
 
-
   if (text) {
     element.innerText = text;
   }
